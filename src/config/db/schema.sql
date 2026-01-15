@@ -1,0 +1,13 @@
+CREATE DATABASE SmartUniversity;
+GO
+
+USE SmartUniversity;
+GO
+
+CREATE TABLE users (
+  id INT IDENTITY(1,1) PRIMARY KEY,
+  email NVARCHAR(255) UNIQUE NOT NULL,
+  password NVARCHAR(255) NOT NULL,
+  role NVARCHAR(20) DEFAULT 'user',
+  created_at DATETIME DEFAULT GETDATE()
+);
