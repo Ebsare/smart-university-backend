@@ -3,13 +3,24 @@ const cors = require("cors");
 const { poolPromise } = require("./config/mssql");
 
 const authRoutes = require("./routes/auth.routes");
+const courseRoutes = require("./routes/course.routes");
+const courseEventRoutes = require("./routes/courseEvent.routes");
+const userCourseRoutes = require("./routes/userCourse.routes");
+const activityLogRoutes = require("./routes/activityLog.routes");
+
+
 
 
 const app = express();
 
+
 app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRoutes);
+app.use("/api/courses", courseRoutes);
+app.use("/api/course-events", courseEventRoutes);
+app.use("/api/user-courses", userCourseRoutes);
+app.use("/api/logs", activityLogRoutes);
 
 app.get("/", (req, res) => {
   res.json({ message: "Smart University API running" });
