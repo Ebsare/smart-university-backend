@@ -21,6 +21,8 @@ app.use("/api/courses", courseRoutes);
 app.use("/api/course-events", courseEventRoutes);
 app.use("/api/user-courses", userCourseRoutes);
 app.use("/api/logs", activityLogRoutes);
+app.use("/api/users", require("./routes/user.routes"));
+
 
 app.get("/", (req, res) => {
   res.json({ message: "Smart University API running" });

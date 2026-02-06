@@ -1,16 +1,14 @@
 const router = require("express").Router();
-const {
-  createCourse,
-  getCoursesWithEvents,
-  getCourseById,
-  updateCourse,
-  deleteCourse
-} = require("../controllers/course.controller");
+const course = require("../controllers/course.controller");
+const { verifyToken, requireAdmin } = require("../middlewares/auth.middleware");
 
-router.post("/", createCourse);
-router.get("/", getCoursesWithEvents);
-router.get("/:id", getCourseById);
-router.put("/:id", updateCourse);
-router.delete("/:id", deleteCourse);
+// READ (të gjithë userat e loguar)
+router.get("/", verifyToken, course.getCourses);
+router.get("/:id", verifyToken, course.getCourseById);
+
+// ADMIN CRUD (vetëm admin)
+router.post("/", verifyToken, requireAdmin, course.createCourse);
+router.put("/:id", verifyToken, requireAdmin, course.updateCourse);
+router.delete("/:id", verifyToken, requireAdmin, course.deleteCourse);
 
 module.exports = router;
